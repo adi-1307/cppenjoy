@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std; 
+# define ll long long int
+# define  vi vector<int>
+# define  vp  vector<pair<int,int>>
+# define  f(a,b) for(int i=a;i<b;i++)
+# define  pii pair<int,int>
+# define mod 1e9+7
+int GCD(int A, int B) {
+    if(B==0)
+        return A;/*Euclid’s Algorithm is GCD(A, B) = GCD(B, A % B). The algorithm will recurrentse until A % B = 0.
+                  The time complexity of Euclid’s Algorithm is O(log(max(A, B))).*/
+    else 
+        return GCD(B, A % B);
+}
+
+
+
+int main()
+{
+ int n;
+ cin>>n;
+ /*you need to find out shortest prime factor of n.
+ */
+ vector<int>spf(n+1);
+ //initially all were considered as prime.
+ spf[0]=0;
+ spf[1]=1;
+
+ for(int i=2;i<=n;i++)
+ {
+     spf[i]=i;
+ }
+ for(int i=2;i<=sqrt(n);i++)
+ {
+     if(spf[i]==i)//it means that it is a prime number. mark all its multiples spf as i.only when spf[j]==j.
+         for(int j=i*i;j<=n;j+=i)
+         {
+             if(spf[j]=j)//it means the spf of this multiple is not previously initialized.
+             spf[j]=i;
+         }
+     }
+ 
+ 
+ for(int i=0;i<=n;i++)
+ {
+     cout<<spf[i]<<" ";
+ }
+ }
+ 
