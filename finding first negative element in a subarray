@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std; 
+# define ll long long int
+# define  vi vector<int>
+# define  vp  vector<pair<int,int>>
+# define  f(a,b) for(int i=a;i<b;i++)
+# define  pii pair<int,int>
+# define mod 1e9+7
+int GCD(int A, int B) {
+    if(B==0)
+        return A;/*Euclid’s Algorithm is GCD(A, B) = GCD(B, A % B). The algorithm will recurrentse until A % B = 0.
+                  The time complexity of Euclid’s Algorithm is O(log(max(A, B))).*/
+    else 
+        return GCD(B, A % B);
+}
+
+
+
+int main()
+{
+ int n,k;
+ cin>>n>>k;
+int arr[n];
+for(int i=0;i<n;i++)
+cin>>arr[i];
+int i=0,j=0;
+queue<int>q;
+vector<int>ans;
+while(j!=n)
+{
+    if(arr[j]<0)
+     q.push(arr[j]);//this will be used in future to do calculations
+
+     if(j-i+1<k)
+     j++;//front make the subarray of size k
+
+     else if(j-i+1==k)
+     {
+         //do calculations
+       if(!q.empty())
+       {
+           ans.push_back(q.front());
+
+       }
+       else 
+       {
+           ans.push_back(0);
+
+       }
+       if(arr[i]==q.front())
+       {
+           q.pop();
+       }
+ i++;
+ j++;
+     }
+}
+for(auto i:ans)
+{
+    cout<<i<<" ";
+}
+}
