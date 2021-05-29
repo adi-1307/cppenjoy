@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+#define pb push_back
+#define si second
+#define fi first
+
+signed main()        
+{ string s1="aditya";
+string s2(s1.rbegin(),s1.rend());
+cout<<s2;
+vector<int>v1={1,2,3,4};
+vector<int>v2(v1.rbegin(),v1.rend());
+for(auto item:v2)
+cout<<item<<endl;
+
+//how to enter element in a reverse order at the time of declaration.
+}
