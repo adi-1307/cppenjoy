@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// global declaration of adjaency list
+vector<int>adj;
+
+int main()
+{
+int nnodes;
+cin>>nnodes;
+int edges;
+cin>>edges;
+
+adj[nnodes+1];
+
+for(int i=0;i<edges;i++)
+{
+int node1,node2;
+cin>>node1>>node2;
+adj[node1].push_back(node2);
+adj[node2].push_back(node1);//filing the adjaency list
+}
+
+//printing adjaency list elements
+for(int i=1;i<=n;i++)
+{
+cout<<adj[i]<<"->";
+for(auto it:adj[i])//as adj[i] is the vector
+{
+cout<<it;
+}
+cout<<endl;
+}
+}
