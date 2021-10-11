@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef pair<int,pair<int,string>> pp;
+
+int main()
+{    
+    int n;
+    cin>>n;
+    int edges;
+    cin>>edges;
+    vector<pair<int,int>>adj[n];
+    for(int i=0;i<edges;i++)
+    { int a,b,dst;
+    cin>>a>>b>>dst;
+     adj[a].push_back({b,dst});
+     
+     adj[b].push_back({a,dst});
+    }
+    int src;
+    cin>>src;
+  priority_queue<pp,vector<pp>,greater<pp>>pq;
+  pair<int,string>temp={src,to_string(src)+""};
+  pq.push({0,temp});
+  bool visited[n]={0};
+  
+  while(pq.size()>0)
+  {
+    pp rem=pq.top();
+    pq.pop();
+    pair<int,string> val=rem.second;
+    if(visited[val.first])
+    continue;
+    visited[val.first]=1;
+    cout<<rem.first<<" "<<val.first<<" "<<val.second<<endl;
+
+
+    for(int i=0;i<adj[val.first].size();i++)
+    {
+      if(!visited[adj[val.first][i].first])
+      {
+        pair<int,string>temp1={adj[val.first][i].first,val.second+to_string(adj[val.first][i].first)};
+        pq.push({rem.first+adj[val.first][i].second, temp1});
+      }
+    }
+  }
+  
+}
+  
+  
