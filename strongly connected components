@@ -1,0 +1,75 @@
+# include<bits/stdc++.h>
+using namespace std;
+vector<int>adj[100001];
+int vis[100001];
+vector<int>trans[100001];
+stack<int>st;
+void dfs(int node)
+{
+    vis[node]=1;
+    for(auto it:adj[node])
+    {
+        if(!vis[it])
+        dfs(it);
+    }
+    st.push(node);
+    }//this will be stored for topological sort.
+
+
+    void rdfs(int node)
+    {
+        vis[node]=1;
+        cout<<node<<" ";
+        for(auto it: trans[node])
+        {
+            if(!vis[it])
+            {
+                rdfs(it);
+            }
+        }
+
+    }
+
+
+int main()
+{int n,e;
+cin>>n>>e;
+
+for(int i=0;i<e;i++)
+{
+    int a,b;
+    cin>>a>>b;
+    adj[a].push_back(b);
+}
+// this how the graph will be created
+
+
+for(int i=1;i<=n;i++)
+{
+    if(!vis[i])
+    dfs(i);
+}
+for(int i=1;i<=n;i++)
+{
+    vis[i]=0;
+    for(auto it: adj[i])
+    {
+        trans[it].push_back(i);
+    }
+}
+int cnt=0;
+while(st.size()>0)
+{
+    int rem=st.top();
+    st.pop();
+    if(!vis[rem])
+    {  cout<<"ss:";
+        rdfs(rem);
+        cnt++;
+        cout<<endl;
+    }
+}
+cout<<cnt<<endl;
+
+
+}
