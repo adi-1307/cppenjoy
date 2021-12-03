@@ -6,7 +6,7 @@ Binarynode* create()
     if(data!=-1)
     { head=new Binarynode(data);
     }
-    cin>>data;
+    
     queue<Binarynode*>que;
     que.push(head);
     while(que.size()>0)
