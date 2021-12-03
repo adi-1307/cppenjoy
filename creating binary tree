@@ -1,0 +1,29 @@
+Binarynode* create()
+{
+    int data;
+    cin>>data;
+    Binarynode * head;
+    if(data!=-1)
+    { head=new Binarynode(data);
+    }
+    cin>>data;
+    queue<Binarynode*>que;
+    que.push(head);
+    while(que.size()>0)
+    {  Binarynode * temp=que.front();
+      que.pop();
+        cin>>data;
+        if(data!=-1)
+        {
+            temp->left=new Binarynode(data);
+            que.push(temp->left);
+        }   
+        cin>>data;
+        if(data!=-1)
+        {
+            temp->right=new Binarynode(data);
+            que.push(temp->right);
+        }
+    }
+    return head;
+}
