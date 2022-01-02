@@ -1,0 +1,98 @@
+# include <bits/stdc++.h>
+using namespace std;
+
+class Treenode
+{   public:
+  int data;
+  Treenode *left;
+  Treenode *right;
+
+
+  Treenode(int data)
+  { this->data=data;
+    left=NULL;
+    right=NULL;
+
+  }
+
+};
+
+unordered_map<Treenode *,Treenode *>ump;
+Treenode * make_tree()
+{  
+ int input;
+ cin>>input;
+ Treenode *root;
+ if(input==-1)
+  return NULL;
+ else if(input!=-1)
+ {
+   Treenode *newnode =new Treenode(input);
+   root=newnode;
+ }
+ 
+  queue<Treenode*>que;
+  que.push(root);
+ while(que.size()>0)
+ {
+   Treenode *temp=que.front();
+    que.pop();
+   cin>>input;
+   if(input!=-1)
+   {Treenode *leftnode =new Treenode(input);
+   temp->left=leftnode;
+   que.push(leftnode);}
+
+    cin>>input;
+    if(input!=-1)
+   { Treenode *rightnode=new Treenode(input);
+    temp->right=rightnode;
+       que.push(rightnode);
+   }
+ }
+ return root;
+}
+
+
+void bfs(Treenode * root)
+{
+  queue<Treenode *>que;
+  que.push(root);
+  while(que.size()>0)
+  {
+    Treenode* temp=que.front();
+    que.pop();
+    if(temp->left)
+    {
+      que.push(temp->left);
+      ump.insert({temp->left,temp});
+    }
+    if(temp->right)
+    {
+      que.push(temp->right);
+      ump.insert({temp->right,temp});
+    }
+  }
+}
+
+bool search(Treenode * root ,int value)
+{
+  if(root==NULL)
+  return false;
+  if(root->data==value)
+  return true;
+  bool leftfind=search(root->left,value);
+  bool rightfind= search(root->right,value);
+  return leftfind||rightfind;
+}
+
+int main()
+{
+  Treenode *root=make_tree();
+  bfs(root);
+
+ bool is_Present=search(root,10);
+ cout<<is_Present<<endl;
+  
+
+}
